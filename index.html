@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MoneyMonky</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <!-- Alkalmazás ikonja (favicon) -->
+  <link rel="icon" href="icons/icon-192x192.png" type="image/png">
+  <!-- Pie diagramhoz a Chart.js könyvtár (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>MoneyMonky</h1>
+    <div class="month-navigation">
+      <button id="prev-month">&lt;</button>
+      <span id="current-month"></span>
+      <button id="next-month">&gt;</button>
+    </div>
+  </header>
+  <main>
+    <!-- Egyenleg és összesítő rész -->
+    <section class="balance-summary">
+      <h2>Egyenleg</h2>
+      <p>Bevétel: <span id="total-income">0</span> Ft</p>
+      <p>Kiadás: <span id="total-expense">0</span> Ft</p>
+      <p>Megtakarítás: <span id="total-saving">0</span> Ft</p>
+      <p>Egyenleg: <span id="balance">0</span> Ft</p>
+    </section>
+
+    <!-- Költségvetési tervező -->
+    <section class="budget-planner">
+      <h2>Költségvetési tervező</h2>
+      <form id="budget-form">
+        <label for="monthly-budget">Havi költségvetés:</label>
+        <input type="number" id="monthly-budget" placeholder="Pl.: 300000" required>
+        <button type="submit">Mentés</button>
+      </form>
+      <p>Tervezett költségvetés: <span id="saved-budget">0</span> Ft</p>
+      <p>Kiadások aránya a költségvetéshez: <span id="budget-adherence">0%</span></p>
+    </section>
+
+    <!-- Új tétel felvitele -->
+    <section class="transaction-entry">
+      <h2>Új tétel hozzáadása</h2>
+      <form id="transaction-form">
+        <div class="form-group">
+          <label for="transaction-type">Típus:</label>
+          <select id="transaction-type">
+            <option value="income">Bevétel</option>
+            <option value="expense">Kiadás</option>
+            <option value="saving-deposit">Megtakarítás betét</option>
+            <option value="saving-withdrawal">Megtakarítás kivét</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="transaction-date">Dátum:</label>
+          <input type="date" id="transaction-date" required>
+        </div>
+        <div class="form-group">
+          <label for="transaction-amount">Összeg (Ft):</label>
+          <input type="number" id="transaction-amount" placeholder="Pl. 5000" required>
+        </div>
+        <div class="form-group">
+          <label for="transaction-category">Kategória:</label>
+          <select id="transaction-category"></select>
+          <button type="button" id="add-category-btn">+ Új kategória</button>
+        </div>
+        <button type="submit">Tétel hozzáadása</button>
+      </form>
+    </section>
+
+    <!-- Tárolt tételek listája -->
+    <section class="transactions-list">
+      <h2>Tárolt tételek</h2>
+      <ul id="transactions"></ul>
+    </section>
+
+    <!-- Kördiagram a kategóriák megoszlásáról -->
+    <section class="chart-section">
+      <h2>Kategóriák megoszlása (%)</h2>
+      <canvas id="pieChart"></canvas>
+    </section>
+
+    <!-- CSV letöltés -->
+    <section class="csv-export">
+      <button id="export-csv">CSV letöltés</button>
+    </section>
+  </main>
+
+  <!-- Modal ablak az új kategória felviteléhez -->
+  <div id="category-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Új kategória hozzáadása</h2>
+      <form id="category-form">
+        <div class="form-group">
+          <label for="category-name">Kategória név:</label>
+          <input type="text" id="category-name" required>
+        </div>
+        <div class="form-group">
+          <label for="category-icon">Ikon (emoji vagy szöveg):</label>
+          <input type="text" id="category-icon" placeholder="Pl. 🍔" required>
+        </div>
+        <div class="form-group">
+          <label for="category-color">Szín (hex kód, pl.: #ff0000):</label>
+          <input type="color" id="category-color" value="#ff0000" required>
+        </div>
+        <button type="submit">Kategória hozzáadása</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Service worker regisztrációja -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => {
+            console.log('ServiceWorker regisztrálva:', registration);
+          })
+          .catch(error => {
+            console.error('ServiceWorker regisztrálás sikertelen:', error);
+          });
+      });
+    }
+  </script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
