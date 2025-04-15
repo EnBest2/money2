@@ -1,0 +1,128 @@
+/* Alap stílusok */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #333;
+}
+
+header {
+  background-color: #007AB5; /* RAL 5015: modern, kifejező kék árnyalat */
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.month-navigation {
+  margin-top: 10px;
+}
+
+.month-navigation button {
+  background-color: #005f8a;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0 5px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+main {
+  padding: 15px;
+}
+
+h1, h2 {
+  margin: 10px 0;
+}
+
+form {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+input, select, button {
+  padding: 8px;
+  font-size: 16px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007AB5;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background-color: #005f8a;
+}
+
+.transactions-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transactions-list li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+}
+
+.transaction-item span {
+  margin-right: 10px;
+}
+
+/* Modal ablak stílusok az új kategória számára */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  main {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
